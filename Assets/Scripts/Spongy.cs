@@ -6,14 +6,14 @@ public class Spongy : MonoBehaviour
 {
     [SerializeField]
     private float speed = 3.0f;
-    [SerializeField]
-    private GUIStyle guiStyle;
 
-    public int score = 0;
+    private GUIStyle guiStyle = new GUIStyle();
 
     private int lives = 3;
+
     private int timerMinutes = 0;
     private int timerSeconds = 0;
+
     private float sideLimit;
 
     private Renderer spongyRenderer;
@@ -34,6 +34,8 @@ public class Spongy : MonoBehaviour
         backgroundRenderer = backgroundObject.GetComponent<Renderer>();
 
         sideLimit = backgroundRenderer.bounds.size.x / 2;
+
+        guiStyle.normal.textColor = Color.yellow;
     }
 
     // Update is called once per frame
@@ -88,8 +90,8 @@ public class Spongy : MonoBehaviour
         timerSeconds = (int) Time.time % 60;
 
         GUI.Box(new Rect(10, 10, 100, 30), "Time: " + timerMinutes + ":" + timerSeconds, guiStyle);
-        GUI.Box(new Rect(400, 10, 100, 30), "Score: " + Controller.score, guiStyle);
-        GUI.Box(new Rect(400, 45, 100, 30), "Lives: " + lives, guiStyle);
+        GUI.Box(new Rect(10, 45, 100, 30), "Score: " + Controller.score, guiStyle);
+        GUI.Box(new Rect(10, 80, 100, 30), "Lives: " + lives, guiStyle);
     }
 
     private void RemovalGrime()
