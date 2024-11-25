@@ -66,22 +66,19 @@ public class Spongy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        string collidingObjectName = collision.gameObject.name;
         string collidingObjectTag = collision.gameObject.tag;
-        if(collidingObjectName.Equals("Acid(Clone)"))
+        if(collidingObjectTag.Equals("Acid"))
         {
             lives--;
-            if(lives <= 0)
-            {
-                RemovalGrime();
-                RemovalAcid();
-                Time.timeScale = 0;
-            }
+            Destroy(collision.gameObject);
+            
+            if(lives <= 0) EndGame();
         }
 
-        if(collidingObjectName.Equals("Grime(Clone)"))
+        if(collidingObjectTag.Equals("Grime"))
         {
             Controller.score += 50;
+            Destroy(collision.gameObject);
         }
 
         if(collidingObjectTag.Equals("Soap"))
@@ -101,13 +98,20 @@ public class Spongy : MonoBehaviour
         GUI.Box(new Rect(10, 80, 100, 30), "Lives: " + lives, guiStyle);
     }
 
-    private void RemovalGrime()
+    private void EndGame()
+    {
+        RemoveGrime();
+        RemoveAcid();
+        Time.timeScale = 0;
+    }
+
+    private void RemoveGrime()
     {
         gameObjects = GameObject.FindGameObjectsWithTag("Grime");
         foreach(GameObject grimeObject in gameObjects) Destroy(grimeObject);
     }
 
-    private void RemovalAcid()
+    private void RemoveAcid()
     {
         gameObjects = GameObject.FindGameObjectsWithTag("Acid");
         foreach(GameObject acidObject in gameObjects) Destroy(acidObject);
