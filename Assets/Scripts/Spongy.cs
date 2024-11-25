@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Spongy : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 3.0f;
+    [SerializeField] private float speed = 3.0f;
 
     private GUIStyle guiStyle = new GUIStyle();
 
@@ -67,7 +66,9 @@ public class Spongy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name.Equals("Acid(Clone)"))
+        string collidingObjectName = collision.gameObject.name;
+        string collidingObjectTag = collision.gameObject.tag;
+        if(collidingObjectName.Equals("Acid(Clone)"))
         {
             lives--;
             if(lives <= 0)
@@ -78,9 +79,15 @@ public class Spongy : MonoBehaviour
             }
         }
 
-        if(collision.gameObject.name.Equals("Grime(Clone)"))
+        if(collidingObjectName.Equals("Grime(Clone)"))
         {
             Controller.score += 50;
+        }
+
+        if(collidingObjectTag.Equals("Soap"))
+        {
+            lives++;
+            Destroy(collision.gameObject);
         }
     }
 

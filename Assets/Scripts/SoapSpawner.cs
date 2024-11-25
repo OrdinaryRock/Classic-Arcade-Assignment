@@ -2,32 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grime : MonoBehaviour
+public class SoapSpawner : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D grime;
+    [SerializeField] private Rigidbody2D soapPrefab;
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float spawnHeight = 7f;
     [SerializeField] private float spawnRange = 6.5f;
+    [SerializeField] private float spawnInterval = 10f;
 
-    void Awake()
+    void Start()
     {
-        Invoke(nameof(SpawnGrime), 2f);
+        InvokeRepeating(nameof(SpawnSoap), spawnInterval, spawnInterval);
     }
 
-    private void SpawnGrime()
+    private void SpawnSoap()
     {
-        Rigidbody2D grimeInstance;
+        Rigidbody2D soapInstance;
         Vector3 spawnPosition = new Vector3();
         spawnPosition.x = Random.Range(spawnRange, -spawnRange);
         spawnPosition.y = spawnHeight;
-        grimeInstance = Instantiate(grime, spawnPosition, transform.rotation);
-        grimeInstance.name = "Grime(Clone)";
-        grimeInstance.velocity = Vector2.down * speed;
+        soapInstance = Instantiate(soapPrefab, spawnPosition, transform.rotation);
+        soapInstance.name = "Soap";
+        soapInstance.velocity = Vector2.down * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Equals("Spongy"))
+        if(collision.gameObject.name.Equals("Spongy"))
         {
             Destroy(gameObject);
         }

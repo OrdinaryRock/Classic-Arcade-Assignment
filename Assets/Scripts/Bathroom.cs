@@ -10,6 +10,10 @@ public class Bathroom : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.tag == "Soap")
+        {
+            Destroy(collision.gameObject);
+        }
         if (collision.gameObject.name == "Grime(Clone)")
         {
             Controller.score -= 20;

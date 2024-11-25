@@ -5,14 +5,10 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Acid : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody2D acid;
-    [SerializeField]
-    private float speed = -3.0f;
-    [SerializeField]
-    private float spawnHeight = 7f;
-    [SerializeField]
-    private float spawnRange = 6.5f;
+    [SerializeField] private Rigidbody2D acid;
+    [SerializeField] private float speed = 3.0f;
+    [SerializeField] private float spawnHeight = 7f;
+    [SerializeField] private float spawnRange = 6.5f;
 
     void Awake()
     {
