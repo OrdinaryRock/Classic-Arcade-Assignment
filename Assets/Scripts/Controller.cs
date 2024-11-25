@@ -7,4 +7,9 @@ public static class Controller
     public static int score = 0;
     public static int bleachCollected = 0;
     public static int maxBleachCollected = 3;
+
+    public static void AddBleach()
+    {
+        if(bleachCollected < maxBleachCollected) bleachCollected++;
+    }
 }

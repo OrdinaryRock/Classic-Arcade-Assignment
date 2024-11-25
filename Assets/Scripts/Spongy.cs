@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spongy : MonoBehaviour
 {
     [SerializeField] private float speed = 3.0f;
+    [SerializeField] private BleachCounter bleachCounter;
 
     private GUIStyle guiStyle = new GUIStyle();
 
@@ -62,6 +63,11 @@ public class Spongy : MonoBehaviour
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            bleachCounter.UseBleach();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -74,16 +80,19 @@ public class Spongy : MonoBehaviour
             
             if(lives <= 0) EndGame();
         }
-
         if(collidingObjectTag.Equals("Grime"))
         {
             Controller.score += 50;
             Destroy(collision.gameObject);
         }
-
         if(collidingObjectTag.Equals("Soap"))
         {
             lives++;
+            Destroy(collision.gameObject);
+        }
+        if (collidingObjectTag.Equals("Bleach"))
+        {
+            bleachCounter.AddBleach();
             Destroy(collision.gameObject);
         }
     }

@@ -5,8 +5,12 @@ using UnityEngine;
 public class BleachCounter : MonoBehaviour
 {
     [SerializeField] private GameObject spriteTemplate;
+    [SerializeField] private Sprite silhouetteSprite;
+    [SerializeField] private Sprite displaySprite;
     [SerializeField] private int spriteCount;
     [SerializeField] private float horizontalSpacing;
+
+    private int bleachCollected = 0;
 
     private List<GameObject> spriteArray = new List<GameObject>();
 
@@ -24,6 +28,28 @@ public class BleachCounter : MonoBehaviour
             spriteArray.Add(spriteInstance);
         }
         spriteTemplate.SetActive(false);
+    }
+
+    public void AddBleach()
+    {
+        if (bleachCollected < spriteCount) bleachCollected++;
+        spriteArray[bleachCollected - 1].GetComponent<SpriteRenderer>().sprite = displaySprite;
+    }
+
+    public void UseBleach()
+    {
+        if (bleachCollected > 0)
+        { 
+            bleachCollected--;
+            spriteArray[bleachCollected].GetComponent<SpriteRenderer>().sprite = silhouetteSprite;
+            RemoveAcid();
+        }
+    }
+
+    private void RemoveAcid()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Acid");
+        foreach (GameObject acidObject in gameObjects) Destroy(acidObject);
     }
 
     // Update is called once per frame
