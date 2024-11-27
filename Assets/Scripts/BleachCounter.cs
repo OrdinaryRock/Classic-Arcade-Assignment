@@ -9,6 +9,7 @@ public class BleachCounter : MonoBehaviour
     [SerializeField] private Sprite displaySprite;
     [SerializeField] private int spriteCount;
     [SerializeField] private float horizontalSpacing;
+    [SerializeField] private GameObject acidDissolvePrefab;
 
     private int bleachCollected = 0;
 
@@ -49,7 +50,11 @@ public class BleachCounter : MonoBehaviour
     private void RemoveAcid()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Acid");
-        foreach (GameObject acidObject in gameObjects) Destroy(acidObject);
+        foreach(GameObject acidObject in gameObjects)
+        {
+            Instantiate(acidDissolvePrefab, acidObject.transform.position, acidDissolvePrefab.transform.rotation);
+            Destroy(acidObject);
+        }
     }
 
     // Update is called once per frame

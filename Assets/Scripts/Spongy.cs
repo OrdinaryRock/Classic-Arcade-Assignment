@@ -70,7 +70,7 @@ public class Spongy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         string collidingObjectTag = collision.gameObject.tag;
         if(collidingObjectTag.Equals("Acid"))
