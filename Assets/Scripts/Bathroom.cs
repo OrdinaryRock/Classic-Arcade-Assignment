@@ -6,15 +6,15 @@ public class Bathroom : MonoBehaviour
 {
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Acid(Clone)")
+        if (collision.gameObject.tag.Equals("Acid"))
         {
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "Soap")
+        if (collision.gameObject.tag.Equals("Soap"))
         {
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.name == "Grime(Clone)")
+        if (collision.gameObject.tag.Equals("Grime"))
         {
             Controller.score -= 20;
             Destroy(collision.gameObject);

@@ -111,6 +111,8 @@ public class Spongy : MonoBehaviour
     {
         RemoveGrime();
         RemoveAcid();
+        RemoveSoap();
+        RemoveBleach();
         Time.timeScale = 0;
     }
 
@@ -123,6 +125,18 @@ public class Spongy : MonoBehaviour
     private void RemoveAcid()
     {
         gameObjects = GameObject.FindGameObjectsWithTag("Acid");
+        foreach(GameObject acidObject in gameObjects) Destroy(acidObject);
+    }
+
+    private void RemoveSoap()
+    {
+        gameObjects = GameObject.FindGameObjectsWithTag("Soap");
+        foreach(GameObject acidObject in gameObjects) Destroy(acidObject);
+    }
+
+    private void RemoveBleach()
+    {
+        gameObjects = GameObject.FindGameObjectsWithTag("Bleach");
         foreach(GameObject acidObject in gameObjects) Destroy(acidObject);
     }
 }

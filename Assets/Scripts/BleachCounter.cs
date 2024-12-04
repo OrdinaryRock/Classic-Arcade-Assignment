@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BleachCounter : MonoBehaviour
 {
+    [SerializeField] private int bleachCapacity;
     [SerializeField] private GameObject spriteTemplate;
     [SerializeField] private Sprite silhouetteSprite;
     [SerializeField] private Sprite displaySprite;
-    [SerializeField] private int spriteCount;
     [SerializeField] private float horizontalSpacing;
     [SerializeField] private GameObject acidDissolvePrefab;
 
@@ -20,8 +20,8 @@ public class BleachCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spriteCount = Controller.maxBleachCollected;
-        for(int i = 0; i < spriteCount; i++)
+        // Copy and Paste sprites
+        for(int i = 0; i < bleachCapacity; i++)
         {
             Vector3 spawnPosition = transform.position + Vector3.left * i * horizontalSpacing;
             GameObject spriteInstance = Instantiate(spriteTemplate, spawnPosition, spriteTemplate.transform.rotation);
@@ -33,7 +33,7 @@ public class BleachCounter : MonoBehaviour
 
     public void AddBleach()
     {
-        if (bleachCollected < spriteCount) bleachCollected++;
+        if (bleachCollected < bleachCapacity) bleachCollected++;
         spriteArray[bleachCollected - 1].GetComponent<SpriteRenderer>().sprite = displaySprite;
     }
 
@@ -55,11 +55,5 @@ public class BleachCounter : MonoBehaviour
             Instantiate(acidDissolvePrefab, acidObject.transform.position, acidDissolvePrefab.transform.rotation);
             Destroy(acidObject);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

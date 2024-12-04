@@ -14,14 +14,14 @@ public class ItemSpawner : MonoBehaviour
 
     void Awake()
     {
-        Invoke(nameof(SpawnAcid), initialSpawnInterval);
+        Invoke(nameof(SpawnItem), initialSpawnInterval);
         if(spawnIntervalAcceleration != 0)
         {
             InvokeRepeating(nameof(UpdateSpawnInterval), 1f, 1f);
         }
     }
 
-    private void SpawnAcid()
+    private void SpawnItem()
     {
         Rigidbody2D itemInstance;
         Vector3 spawnPosition = new Vector3();
@@ -30,7 +30,7 @@ public class ItemSpawner : MonoBehaviour
         itemInstance = Instantiate(itemPrefab, spawnPosition, transform.rotation);
         itemInstance.name = itemPrefab.gameObject.name;
         itemInstance.velocity = Vector2.down * speed;
-        Invoke(nameof(SpawnAcid), initialSpawnInterval);
+        Invoke(nameof(SpawnItem), initialSpawnInterval);
     }
 
     private void UpdateSpawnInterval()
